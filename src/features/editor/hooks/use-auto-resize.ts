@@ -1,12 +1,12 @@
 import { fabric } from "fabric";
 import { useCallback, useEffect } from "react";
 
-interface useAutoResizeProps {
+interface UseAutoResizeProps {
   canvas: fabric.Canvas | null;
   container: HTMLDivElement | null;
 }
 
-export const useAutoResize = ({ canvas, container }: useAutoResizeProps) => {
+export const useAutoResize = ({ canvas, container }: UseAutoResizeProps) => {
   const autoZoom = useCallback(() => {
     if (!canvas || !container) return;
 
@@ -17,23 +17,26 @@ export const useAutoResize = ({ canvas, container }: useAutoResizeProps) => {
     canvas.setHeight(height);
 
     const center = canvas.getCenter();
+
     const zoomRatio = 0.85;
-    const localWorkSpace = canvas
+    const localWorkspace = canvas
       .getObjects()
       .find((object) => object.name === "clip");
 
-    //   @ts-ignore
-    const scale = fabric.util.findScaleToFit(localWorkSpace, {
+    // @ts-ignore
+    const scale = fabric.util.findScaleToFit(localWorkspace, {
       width: width,
-      height: width,
+      height: height,
     });
 
     const zoom = zoomRatio * scale;
 
     canvas.setViewportTransform(fabric.iMatrix.concat());
     canvas.zoomToPoint(new fabric.Point(center.left, center.top), zoom);
-    if (!localWorkSpace) return;
-    const workSpaceCenter = localWorkSpace.getCenterPoint();
+
+    if (!localWorkspace) return;
+
+    const workspaceCenter = localWorkspace.getCenterPoint();
     const viewportTransform = canvas.viewportTransform;
 
     if (
@@ -43,18 +46,21 @@ export const useAutoResize = ({ canvas, container }: useAutoResizeProps) => {
     ) {
       return;
     }
+
     viewportTransform[4] =
-      canvas.width / 2 - workSpaceCenter.x * viewportTransform[0];
+      canvas.width / 2 - workspaceCenter.x * viewportTransform[0];
 
     viewportTransform[5] =
-      canvas.height / 2 - workSpaceCenter.x * viewportTransform[3];
+      canvas.height / 2 - workspaceCenter.y * viewportTransform[3];
+
     canvas.setViewportTransform(viewportTransform);
 
-    localWorkSpace.clone((cloned: fabric.Rect) => {
+    localWorkspace.clone((cloned: fabric.Rect) => {
       canvas.clipPath = cloned;
       canvas.requestRenderAll();
     });
   }, [canvas, container]);
+
   useEffect(() => {
     let resizeObserver: ResizeObserver | null = null;
 
@@ -62,12 +68,16 @@ export const useAutoResize = ({ canvas, container }: useAutoResizeProps) => {
       resizeObserver = new ResizeObserver(() => {
         autoZoom();
       });
+
       resizeObserver.observe(container);
     }
+
     return () => {
       if (resizeObserver) {
         resizeObserver.disconnect();
       }
     };
   }, [canvas, container, autoZoom]);
+
+  return { autoZoom };
 };
