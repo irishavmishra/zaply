@@ -46,7 +46,6 @@ export const Navbar = ({ activeTool, onChangeActiveTool }: NavbarProps) => {
               onClick={() => {}}
               className="flex items-center gap-x-2"
             >
-              // add Functionality
               <CiFileOn className="size-8" />
               <div>
                 <p>Open</p>
@@ -93,7 +92,7 @@ export const Navbar = ({ activeTool, onChangeActiveTool }: NavbarProps) => {
             <DropdownMenuContent align="end" className="min-w-60">
               <DropdownMenuItem
                 className="flex items-center gap-x-2"
-                onClick={() => {}} //TODO: Add functionality
+                onClick={() => {}}
               >
                 <CiFileOn className="size-8" />
                 <div>
