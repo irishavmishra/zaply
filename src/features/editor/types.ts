@@ -22,9 +22,7 @@ export const STROKE_COLOR = "rgba(0,0,0,1)";
 export const STROKE_WIDTH = 2;
 
 export const CIRCLE_OPTIONS = {
-  radius: 150,
-  left: 100,
-  top: 100,
+  radius: 225.68,
   fill: FILL_COLOR,
   stroke: STROKE_COLOR,
   strokeWidth: STROKE_WIDTH,
@@ -57,13 +55,25 @@ export const TRIANGLE_OPTION = {
 
 export type BuildEditorProps = {
   canvas: fabric.Canvas;
+  fillColor: string;
+  strokeColor: string;
+  strokeWidth: number;
+  setFillColor: (value: string) => void;
+  setStrokeColor: (value: string) => void;
+  setStrokeWidth: (value: number) => void;
 };
 
 export interface Editor {
+  changeStrokeColor: (value: string) => void;
+  changeStrokeWidth: (value: number) => void;
+  changeFillColor: (value: string) => void;
   addCircle: () => void;
   addSoftRectangle: () => void;
   addRectangle: () => void;
   addTriangle: () => void;
   addInverseTriangle: () => void;
   addDiamond: () => void;
+  fillColor: string;
+  strokeColor: string;
+  strokeWidth: number;
 }
