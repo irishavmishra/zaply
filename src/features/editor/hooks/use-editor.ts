@@ -172,6 +172,7 @@ const buildEditor = ({
 
       return value;
     },
+    strokeColor,
     strokeWidth,
     selectedObjects,
   };
