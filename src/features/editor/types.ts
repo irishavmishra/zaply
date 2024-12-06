@@ -78,6 +78,8 @@ export const STROKE_WIDTH = 2;
 export const STROKE_DASH_ARRAY = [];
 export const FONT_FAMILY = "Arial";
 export const FONT_SIZE = 32;
+export const FONT_WEIGHT = 400;
+export const FONT_STYLE = "normal";
 
 export const CIRCLE_OPTIONS = {
   radius: 225.68,
@@ -145,9 +147,16 @@ export interface Editor {
   sendBackwards: () => void;
   changeFillColor: (value: string) => void;
   changeFontFamily: (value: string) => void;
+  changeFontWeight: (value: number) => void;
+  changeFontStyle: (value: string) => void;
+  changeFontSize: (value: number) => void;
+  changeFontLinethrough: (value: boolean) => void;
+  changeFontUnderline: (value: boolean) => void;
   changeStrokeColor: (value: string) => void;
   changeStrokeWidth: (value: number) => void;
   changeStrokeDashArray: (value: number[]) => void;
+  changeTextAlign: (value: string) => void;
+
   addCircle: () => void;
   addSoftRectangle: () => void;
   addRectangle: () => void;
@@ -157,6 +166,12 @@ export interface Editor {
   canvas: fabric.Canvas;
   getActiveFillColor: () => string;
   getActiveFontFamily: () => string;
+  getActiveFontWeight: () => number;
+  getActiveFontStyle: () => string;
+  getActiveFontSize: () => number;
+  getActiveFontLinethrough: () => boolean;
+  getActiveFontUnderline: () => boolean;
+  getActiveTextAlign: () => string;
   getActiveStrokeColor: () => string;
   getActiveStrokeWidth: () => number;
   getActiveOpacity: () => number;
