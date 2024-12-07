@@ -143,6 +143,7 @@ export type BuildEditorProps = {
 export interface Editor {
   delete: () => void;
   addText: (value: string, options?: ITextboxOptions) => void;
+  addImage: (value: string) => void;
   changeOpacity: (value: number) => void;
   bringForward: () => void;
   sendBackwards: () => void;
