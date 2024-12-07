@@ -15,9 +15,6 @@ export const useGetImages = ()=>{
             const {data} = await response.json()
             return data
         }
-
-
     })
-
     return query
 }
