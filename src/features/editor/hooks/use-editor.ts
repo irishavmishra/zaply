@@ -2,7 +2,7 @@ import { fabric } from "fabric";
 import { useCallback, useState, useMemo } from "react";
 import { useAutoResize } from "./use-auto-resize";
 import { useCanvasEvents } from "./use-canvas-events";
-import { isTextType } from "../utils";
+import { createFilter, isTextType } from "../utils";
 import {
   Editor,
   BuildEditorProps,
@@ -58,10 +58,10 @@ const buildEditor = ({
 
   return {
     canvas,
-    addImage: (value)=>{
+    addImage: (value) => {
       fabric.Image.fromURL(
         value,
-        (image)=>{
+        (image) => {
           const workspace = getWorkspace();
           image.scaleToWidth(workspace?.width || 0)
           image.scaleToHeight(workspace?.height || 0)
@@ -156,6 +156,22 @@ const buildEditor = ({
         }
       });
       canvas.renderAll();
+    },
+
+    changeImageFilter: (value) => {
+      const object = canvas.getActiveObjects()
+      object.forEach((object) => {
+        if (object.type === "image") {
+          const imageObject = object as fabric.Image
+
+          const effect = createFilter(value)
+
+          imageObject.filters = effect ? [effect] : [];
+          imageObject.applyFilters()
+          canvas.renderAll();
+        }
+      })
+
     },
 
     bringForward: () => {
@@ -430,6 +446,7 @@ const buildEditor = ({
 
       return value;
     },
+    
 
     selectedObjects,
   };

@@ -2,6 +2,31 @@ import { fabric } from "fabric";
 import { ITextboxOptions } from "fabric/fabric-impl";
 import * as material from "material-colors";
 
+
+export const filters = [
+  "none",
+  "blackwhite",
+  "blendcolor",
+  "blur",
+  "brightness",
+  "contrast",
+  "emboss",
+  "gamma",
+  "grayscale",
+  "huerotation",
+  "invert",
+  "kodachrome",
+  "pixelate",
+  "polaroid",
+  "removecolor",
+  "saturation",  
+  "sepia",
+  "sharpen",
+  "technicolor",
+  "vibrance",
+  "vintage"
+]
+
 export const fonts = [
   "Arial",
   "Arial Black",
@@ -158,6 +183,7 @@ export interface Editor {
   changeStrokeWidth: (value: number) => void;
   changeStrokeDashArray: (value: number[]) => void;
   changeTextAlign: (value: string) => void;
+  changeImageFilter: (value: string) => void;
 
   addCircle: () => void;
   addSoftRectangle: () => void;
@@ -175,6 +201,7 @@ export interface Editor {
   getActiveFontUnderline: () => boolean;
   getActiveTextAlign: () => string;
   getActiveStrokeColor: () => string;
+  // getActiveImageFilters: () => string[];
   getActiveStrokeWidth: () => number;
   getActiveOpacity: () => number;
   getActiveStrokeDashArray: () => number[];
