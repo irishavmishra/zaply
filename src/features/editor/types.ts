@@ -19,7 +19,7 @@ export const filters = [
   "pixelate",
   "polaroid",
   "removecolor",
-  "saturation",  
+  "saturation",
   "sepia",
   "sharpen",
   "technicolor",
@@ -156,6 +156,8 @@ export type BuildEditorProps = {
   strokeWidth: number;
   strokeDashArray: number[];
   fontFamily: string;
+  copy: () => void;
+  paste: () => void;
   setStrokeDashArray: (value: number[]) => void;
   setFillColor: (value: string) => void;
   setStrokeColor: (value: string) => void;
@@ -166,6 +168,8 @@ export type BuildEditorProps = {
 };
 
 export interface Editor {
+  onCopy: () => void
+  onPaste: () => void
   delete: () => void;
   addText: (value: string, options?: ITextboxOptions) => void;
   addImage: (value: string) => void;
@@ -201,7 +205,6 @@ export interface Editor {
   getActiveFontUnderline: () => boolean;
   getActiveTextAlign: () => string;
   getActiveStrokeColor: () => string;
-  // getActiveImageFilters: () => string[];
   getActiveStrokeWidth: () => number;
   getActiveOpacity: () => number;
   getActiveStrokeDashArray: () => number[];
