@@ -73,6 +73,7 @@ export const colors = [
   material.lime["500"],
   material.yellow["500"],
   material.amber["500"],
+  material.white,
   material.orange["500"],
   material.deepOrange["500"],
   material.brown["500"],
@@ -158,16 +159,18 @@ export type BuildEditorProps = {
   fontFamily: string;
   copy: () => void;
   paste: () => void;
+  autoZoom: () => void
   setStrokeDashArray: (value: number[]) => void;
   setFillColor: (value: string) => void;
   setStrokeColor: (value: string) => void;
   setStrokeWidth: (value: number) => void;
   setFontFamily: (value: string) => void;
-
   selectedObjects: fabric.Object[];
 };
 
 export interface Editor {
+  enableDrawingMode: () => void
+  disableDrawingMode: () => void
   onCopy: () => void
   onPaste: () => void
   delete: () => void;
